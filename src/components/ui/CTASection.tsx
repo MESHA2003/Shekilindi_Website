@@ -3,6 +3,7 @@ import { siteInfo } from '@/data/site'
 import { cn } from '@/lib/theme'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
+import { useLanguage } from '@/lib/language'
 
 interface CTASectionProps {
   title?: string
@@ -15,13 +16,15 @@ export default function CTASection({
   description = 'Whether you are a customer, partner or supplier — we would love to hear from you.',
   className,
 }: CTASectionProps) {
+  const { t } = useLanguage()
+
   return (
     <section
       className={cn(
         'relative overflow-hidden bg-gradient-to-r from-brand-800 via-brand-700 to-brand-900 py-16 sm:py-20',
         className,
       )}
-      aria-label="Call to action"
+      aria-label={t('Call to action')}
     >
       {/* Decorative accents */}
       <div
@@ -35,14 +38,14 @@ export default function CTASection({
 
       <Container className="relative text-center">
         <h2 className="max-w-2xl mx-auto text-3xl font-bold tracking-tight text-white sm:text-4xl">
-          {title}
+          {t(title)}
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-brand-100 sm:text-lg">
-          {description}
+          {t(description)}
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button to="/contact" variant="secondary" icon={ArrowRight}>
-            Contact Us
+            {t('Contact Us')}
           </Button>
           <Button
             href={`https://wa.me/${siteInfo.contact.whatsapp.replace(/\D/g, '')}`}
@@ -50,7 +53,7 @@ export default function CTASection({
             icon={MessageCircle}
             className="border-white/40 text-white hover:border-white hover:bg-white/10"
           >
-            WhatsApp us
+            {t('WhatsApp us')}
           </Button>
         </div>
       </Container>

@@ -12,31 +12,34 @@ import BosniaHardware from '@/pages/businesses/BosniaHardware'
 import BosniaStationery from '@/pages/businesses/BosniaStationery'
 import TripleTwelveHotel from '@/pages/businesses/TripleTwelveHotel'
 import ShekilindiWakala from '@/pages/businesses/ShekilindiWakala'
+import { LanguageProvider } from '@/lib/language'
 
 export default function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/businesses" element={<Businesses />} />
-          <Route path="/products-services" element={<ProductsServices />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/contact" element={<Contact />} />
+      <LanguageProvider>
+        <ScrollToTop />
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/businesses" element={<Businesses />} />
+            <Route path="/products-services" element={<ProductsServices />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/contact" element={<Contact />} />
 
-          {/* Business detail pages */}
-          <Route path="/businesses/herbal-clinic" element={<HerbalClinic />} />
-          <Route path="/businesses/bosnia-hardware" element={<BosniaHardware />} />
-          <Route path="/businesses/bosnia-stationery" element={<BosniaStationery />} />
-          <Route path="/businesses/triple-twelve-hotel" element={<TripleTwelveHotel />} />
-          <Route path="/businesses/shekilindi-wakala" element={<ShekilindiWakala />} />
+            {/* Business detail pages */}
+            <Route path="/businesses/herbal-clinic" element={<HerbalClinic />} />
+            <Route path="/businesses/bosnia-hardware" element={<BosniaHardware />} />
+            <Route path="/businesses/bosnia-stationery" element={<BosniaStationery />} />
+            <Route path="/businesses/triple-twelve-hotel" element={<TripleTwelveHotel />} />
+            <Route path="/businesses/shekilindi-wakala" element={<ShekilindiWakala />} />
 
-          {/* Custom 404 */}
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
+            {/* Custom 404 */}
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </LanguageProvider>
     </BrowserRouter>
   )
 }

@@ -2,6 +2,7 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { useEffect } from 'react'
 import type { GalleryItem } from '@/data/gallery'
 import SmartImage from '@/components/ui/SmartImage'
+import { useLanguage } from '@/lib/language'
 
 interface GalleryLightboxProps {
   items: GalleryItem[]
@@ -17,6 +18,7 @@ export default function GalleryLightbox({
   onClose,
   onNavigate,
 }: GalleryLightboxProps) {
+  const { t } = useLanguage()
   const open = index !== null && index >= 0 && index < items.length
   const item = open ? items[index] : null
 
@@ -48,14 +50,14 @@ export default function GalleryLightbox({
       className="fixed inset-0 z-50 flex items-center justify-center bg-brand-950/95 p-4 backdrop-blur"
       role="dialog"
       aria-modal="true"
-      aria-label={`Image viewer: ${item.title}`}
+      aria-label={`${t('Image viewer:')} ${t(item.title)}`}
       onClick={onClose}
     >
       {/* Close */}
       <button
         type="button"
         onClick={onClose}
-        aria-label="Close image viewer"
+        aria-label={t('Close image viewer')}
         className="absolute right-4 top-4 z-10 flex size-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/25"
       >
         <X aria-hidden="true" className="size-5" />
@@ -69,7 +71,7 @@ export default function GalleryLightbox({
             event.stopPropagation()
             go(-1)
           }}
-          aria-label="Previous image"
+          aria-label={t('Previous image')}
           className="absolute left-3 z-10 flex size-12 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/25 sm:left-6"
         >
           <ChevronLeft aria-hidden="true" className="size-6" />
@@ -83,13 +85,13 @@ export default function GalleryLightbox({
       >
         <SmartImage
           src={item.image}
-          alt={item.title}
-          label={item.title}
+          alt={t(item.title)}
+          label={t(item.title)}
           className="max-h-[75vh] w-full rounded-xl"
         />
         <figcaption className="mt-4 text-center text-sm text-brand-100">
-          <span className="font-bold text-white">{item.title}</span>
-          {item.caption ? <span className="mt-1 block text-brand-300">{item.caption}</span> : null}
+          <span className="font-bold text-white">{t(item.title)}</span>
+          {item.caption ? <span className="mt-1 block text-brand-300">{t(item.caption)}</span> : null}
           <span className="mt-2 block text-xs uppercase tracking-widest text-brand-400">
             {index + 1} / {items.length}
           </span>
@@ -104,7 +106,7 @@ export default function GalleryLightbox({
             event.stopPropagation()
             go(1)
           }}
-          aria-label="Next image"
+          aria-label={t('Next image')}
           className="absolute right-3 z-10 flex size-12 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/25 sm:right-6"
         >
           <ChevronRight aria-hidden="true" className="size-6" />

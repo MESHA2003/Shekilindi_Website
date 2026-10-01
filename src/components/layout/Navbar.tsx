@@ -6,8 +6,11 @@ import { cn } from '@/lib/theme'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import MobileMenu from '@/components/layout/MobileMenu'
+import LanguageSwitcher from '@/components/layout/LanguageSwitcher'
+import { useLanguage } from '@/lib/language'
 
 export default function Navbar() {
+  const { t } = useLanguage()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -29,7 +32,7 @@ export default function Navbar() {
         {/* Top bar — hidden on small screens */}
         <div className="hidden bg-brand-900 text-brand-100 lg:block">
           <Container className="flex items-center justify-between py-1.5 text-xs">
-            <p className="font-medium tracking-wide">{siteInfo.tagline}</p>
+            <p className="font-medium tracking-wide">{t(siteInfo.tagline)}</p>
             <div className="inline-flex items-center gap-1.5 font-semibold text-gold-400">
               <Phone aria-hidden="true" className="size-3.5" />
               {siteInfo.contact.phones.map((phone, index) => (
@@ -51,7 +54,7 @@ export default function Navbar() {
           <Link
             to="/"
             className="flex items-center gap-3"
-            aria-label={`${siteInfo.name} — home`}
+            aria-label={`${siteInfo.name} — ${t('Home').toLowerCase()}`}
           >
             {/* Round logo badge — real logo from public/images/logo/logo.png */}
             <span className="relative flex size-11 shrink-0 overflow-hidden rounded-full bg-white shadow-sm ring-1 ring-slate-200 sm:size-12">
@@ -68,7 +71,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop navigation */}
-          <nav aria-label="Main navigation" className="hidden lg:block">
+          <nav aria-label={t('Main navigation')} className="hidden lg:block">
             <ul className="flex items-center gap-1">
               {navLinks.map((link) => (
                 <li key={link.to}>
@@ -84,7 +87,7 @@ export default function Navbar() {
                       )
                     }
                   >
-                    {link.label}
+                    {t(link.label)}
                   </NavLink>
                 </li>
               ))}
@@ -92,13 +95,14 @@ export default function Navbar() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <LanguageSwitcher />
             <Button to="/contact" size="sm" className="hidden sm:inline-flex">
-              Get in Touch
+              {t('Get in Touch')}
             </Button>
             <button
               type="button"
               className="inline-flex size-10 items-center justify-center rounded-lg text-brand-800 transition-colors hover:bg-brand-50 lg:hidden"
-              aria-label="Open menu"
+              aria-label={t(open ? 'Close menu' : 'Open menu')}
               aria-expanded={open}
               onClick={() => setOpen(true)}
             >

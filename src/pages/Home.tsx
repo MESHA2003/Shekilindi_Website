@@ -13,8 +13,11 @@ import ProductCard from '@/components/ui/ProductCard'
 import SectionHeading from '@/components/ui/SectionHeading'
 import ServiceCard from '@/components/ui/ServiceCard'
 import Button from '@/components/ui/Button'
+import { useLanguage } from '@/lib/language'
 
 export default function Home() {
+  const { t } = useLanguage()
+
   return (
     <>
       <HeroSlider slides={heroSlides} />
@@ -57,7 +60,7 @@ export default function Home() {
               description="A snapshot of what our businesses offer."
             />
             <Button to="/products-services" variant="outline" icon={ArrowRight}>
-              View all products
+              {t('View all products')}
             </Button>
           </div>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -97,7 +100,7 @@ export default function Home() {
           </div>
           <div className="mt-10 text-center">
             <Button to="/gallery" variant="outline" icon={ArrowRight}>
-              Browse the gallery
+              {t('Browse the gallery')}
             </Button>
           </div>
         </Container>

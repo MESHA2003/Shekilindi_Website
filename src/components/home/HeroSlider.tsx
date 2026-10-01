@@ -5,6 +5,7 @@ import { cn } from '@/lib/theme'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import SmartImage from '@/components/ui/SmartImage'
+import { useLanguage } from '@/lib/language'
 
 interface HeroSliderProps {
   slides: HeroSlide[]
@@ -26,6 +27,7 @@ interface HeroSliderProps {
  */
 export default function HeroSlider({ slides, interval = 4000 }: HeroSliderProps) {
   const [index, setIndex] = useState(0)
+  const { t } = useLanguage()
   const count = slides.length
 
   const go = useCallback(
@@ -48,7 +50,7 @@ export default function HeroSlider({ slides, interval = 4000 }: HeroSliderProps)
     <section
       className="relative isolate flex min-h-[540px] flex-col justify-center overflow-hidden bg-brand-950 sm:min-h-[600px] lg:min-h-[680px]"
       aria-roledescription="carousel"
-      aria-label="Highlights"
+      aria-label={t('Highlights')}
     >
       {/* Background image layers — crossfade + subtle zoom */}
       {slides.map((slide, i) => (
@@ -106,7 +108,7 @@ export default function HeroSlider({ slides, interval = 4000 }: HeroSliderProps)
                       : 'translate-y-3 opacity-0 delay-0 duration-300',
                   )}
                 >
-                  {slide.eyebrow}
+                  {t(slide.eyebrow)}
                 </p>
                 <h1
                   className={cn(
@@ -116,7 +118,7 @@ export default function HeroSlider({ slides, interval = 4000 }: HeroSliderProps)
                       : 'translate-y-3 opacity-0 delay-0 duration-300',
                   )}
                 >
-                  {slide.title}
+                  {t(slide.title)}
                 </h1>
                 <p
                   className={cn(
@@ -126,7 +128,7 @@ export default function HeroSlider({ slides, interval = 4000 }: HeroSliderProps)
                       : 'translate-y-3 opacity-0 delay-0 duration-300',
                   )}
                 >
-                  {slide.subtitle}
+                  {t(slide.subtitle)}
                 </p>
                 <div
                   className={cn(
@@ -137,14 +139,14 @@ export default function HeroSlider({ slides, interval = 4000 }: HeroSliderProps)
                   )}
                 >
                   <Button to={slide.primaryCta.to} variant="secondary" icon={ArrowRight}>
-                    {slide.primaryCta.label}
+                    {t(slide.primaryCta.label)}
                   </Button>
                   <Button
                     to={slide.secondaryCta.to}
                     variant="outline"
                     className="border-white/40 text-white hover:border-white hover:bg-white/10"
                   >
-                    {slide.secondaryCta.label}
+                    {t(slide.secondaryCta.label)}
                   </Button>
                 </div>
               </Container>
@@ -159,7 +161,7 @@ export default function HeroSlider({ slides, interval = 4000 }: HeroSliderProps)
           <button
             type="button"
             onClick={() => go(index - 1)}
-            aria-label="Previous slide"
+            aria-label={t('Previous slide')}
             className="absolute left-3 top-1/2 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur transition hover:bg-white/25 sm:left-6"
           >
             <ChevronLeft aria-hidden="true" className="size-5" />
@@ -167,7 +169,7 @@ export default function HeroSlider({ slides, interval = 4000 }: HeroSliderProps)
           <button
             type="button"
             onClick={() => go(index + 1)}
-            aria-label="Next slide"
+            aria-label={t('Next slide')}
             className="absolute right-3 top-1/2 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur transition hover:bg-white/25 sm:right-6"
           >
             <ChevronRight aria-hidden="true" className="size-5" />
@@ -177,7 +179,7 @@ export default function HeroSlider({ slides, interval = 4000 }: HeroSliderProps)
           <div
             className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2"
             role="tablist"
-            aria-label="Slide selection"
+            aria-label={t('Slide selection')}
           >
             {slides.map((slide, i) => (
               <button
@@ -185,7 +187,7 @@ export default function HeroSlider({ slides, interval = 4000 }: HeroSliderProps)
                 type="button"
                 role="tab"
                 aria-selected={i === index}
-                aria-label={`Go to slide ${i + 1}`}
+                aria-label={`${t('Go to slide')} ${i + 1}`}
                 onClick={() => setIndex(i)}
                 className={cn(
                   'h-2 rounded-full transition-all duration-300',

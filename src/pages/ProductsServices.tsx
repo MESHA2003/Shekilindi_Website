@@ -7,6 +7,7 @@ import CTASection from '@/components/ui/CTASection'
 import ProductCard from '@/components/ui/ProductCard'
 import SectionHeading from '@/components/ui/SectionHeading'
 import ServiceCard from '@/components/ui/ServiceCard'
+import { useLanguage } from '@/lib/language'
 
 /** Look up a business accent from its slug so cards match their brand colour. */
 function accentFor(businessSlug: string): AccentKey {
@@ -14,19 +15,21 @@ function accentFor(businessSlug: string): AccentKey {
 }
 
 export default function ProductsServices() {
+  const { t } = useLanguage()
+
   return (
     <>
       {/* Hero */}
       <section className="bg-gradient-to-r from-brand-800 via-brand-700 to-brand-900 py-16 sm:py-20">
         <Container>
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold-400">
-            Products & Services
+            {t('Products & Services')}
           </p>
           <h1 className="mt-3 max-w-3xl text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
-            Quality products. Reliable services.
+            {t('Quality products. Reliable services.')}
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-brand-100 sm:text-lg">
-            Everything our businesses offer, in one place.
+            {t('Everything our businesses offer, in one place.')}
           </p>
         </Container>
       </section>

@@ -3,21 +3,24 @@ import BusinessCard from '@/components/business/BusinessCard'
 import Container from '@/components/ui/Container'
 import CTASection from '@/components/ui/CTASection'
 import SectionHeading from '@/components/ui/SectionHeading'
+import { useLanguage } from '@/lib/language'
 
 export default function Businesses() {
+  const { t } = useLanguage()
+
   return (
     <>
       {/* Hero */}
       <section className="bg-gradient-to-r from-brand-800 via-brand-700 to-brand-900 py-16 sm:py-20">
         <Container>
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold-400">
-            Our Businesses
+            {t('Our Businesses')}
           </p>
           <h1 className="mt-3 max-w-3xl text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
-            A family of businesses you can trust
+            {t('A family of businesses you can trust')}
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-brand-100 sm:text-lg">
-            Five distinct businesses, one shared standard of quality and service.
+            {t('Five distinct businesses, one shared standard of quality and service.')}
           </p>
         </Container>
       </section>

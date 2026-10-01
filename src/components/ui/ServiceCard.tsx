@@ -2,6 +2,7 @@ import type { Service } from '@/data/services'
 import { icons } from '@/lib/icons'
 import { accentThemes, cn, type AccentKey } from '@/lib/theme'
 import { Sparkles } from 'lucide-react'
+import { useLanguage } from '@/lib/language'
 
 interface ServiceCardProps {
   service: Service
@@ -12,6 +13,7 @@ interface ServiceCardProps {
 export default function ServiceCard({ service, accent = 'herbal', className }: ServiceCardProps) {
   const theme = accentThemes[accent]
   const Icon = icons[service.icon] ?? Sparkles
+  const { t } = useLanguage()
 
   return (
     <article
@@ -29,8 +31,8 @@ export default function ServiceCard({ service, accent = 'herbal', className }: S
       >
         <Icon aria-hidden="true" className="size-6" />
       </div>
-      <h3 className="text-lg font-bold text-slate-900">{service.title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-slate-600">{service.description}</p>
+      <h3 className="text-lg font-bold text-slate-900">{t(service.title)}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-slate-600">{t(service.description)}</p>
     </article>
   )
 }

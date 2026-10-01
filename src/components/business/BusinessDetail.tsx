@@ -9,6 +9,7 @@ import CTASection from '@/components/ui/CTASection'
 import ImageSlider from '@/components/ui/ImageSlider'
 import SectionHeading from '@/components/ui/SectionHeading'
 import SmartImage from '@/components/ui/SmartImage'
+import { useLanguage } from '@/lib/language'
 
 interface BusinessDetailProps {
   business: Business
@@ -21,6 +22,7 @@ interface BusinessDetailProps {
 export default function BusinessDetail({ business }: BusinessDetailProps) {
   const theme = accentThemes[business.accent]
   const Icon = icons[business.icon] ?? Sparkles
+  const { t } = useLanguage()
   const heroImages = business.heroImages ?? []
   const hasHeroImages = heroImages.length > 0
 
@@ -52,7 +54,7 @@ export default function BusinessDetail({ business }: BusinessDetailProps) {
             className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-white/85 transition-colors hover:text-white"
           >
             <ArrowLeft aria-hidden="true" className="size-4" />
-            All businesses
+            {t('All businesses')}
           </Link>
           <div className="flex items-center gap-4">
             <span className="flex size-14 items-center justify-center rounded-2xl bg-white/15 backdrop-blur">
@@ -60,7 +62,7 @@ export default function BusinessDetail({ business }: BusinessDetailProps) {
             </span>
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/75">
-                Our Businesses
+                {t('Our Businesses')}
               </p>
               <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
                 {business.name}
@@ -68,7 +70,7 @@ export default function BusinessDetail({ business }: BusinessDetailProps) {
             </div>
           </div>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg">
-            {business.tagline}
+            {t(business.tagline)}
           </p>
         </Container>
       </section>
@@ -96,11 +98,11 @@ export default function BusinessDetail({ business }: BusinessDetailProps) {
             <SectionHeading
               align="left"
               eyebrow="About"
-              title={`About ${business.shortName}`}
+              title={`${t('About')} ${business.shortName}`}
             />
-            <p className="mt-6 leading-relaxed text-slate-600">{business.about}</p>
+            <p className="mt-6 leading-relaxed text-slate-600">{t(business.about)}</p>
 
-            <h3 className="mt-8 text-lg font-bold text-slate-900">Why choose us</h3>
+            <h3 className="mt-8 text-lg font-bold text-slate-900">{t('Why choose us')}</h3>
             <ul className="mt-4 space-y-3">
               {business.highlights.map((highlight) => (
                 <li key={highlight} className="flex items-start gap-3 text-sm text-slate-700">
@@ -113,7 +115,7 @@ export default function BusinessDetail({ business }: BusinessDetailProps) {
                   >
                     <Check aria-hidden="true" className="size-3" />
                   </span>
-                  {highlight}
+                  {t(highlight)}
                 </li>
               ))}
             </ul>
@@ -126,7 +128,7 @@ export default function BusinessDetail({ business }: BusinessDetailProps) {
           <SectionHeading
             eyebrow="What we offer"
             title="Our Services"
-            description={`A snapshot of what ${business.shortName} provides to customers.`}
+            description="A snapshot of what this business provides to customers."
           />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {business.services.map((service) => (
@@ -138,7 +140,7 @@ export default function BusinessDetail({ business }: BusinessDetailProps) {
                   aria-hidden="true"
                   className={cn('mb-4 block h-1 w-10 rounded-full', theme.dot)}
                 />
-                <h3 className="font-bold text-slate-900">{service}</h3>
+                <h3 className="font-bold text-slate-900">{t(service)}</h3>
               </div>
             ))}
           </div>
@@ -175,13 +177,13 @@ export default function BusinessDetail({ business }: BusinessDetailProps) {
             <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
               <MapPin aria-hidden="true" className={cn('size-5 shrink-0', theme.text)} />
               <span className="text-sm font-semibold text-slate-800">
-                {business.contact.address ?? business.contact.hours ?? 'See contact page'}
+                  {business.contact.address ?? t(business.contact.hours ?? 'See contact page')}
               </span>
             </div>
           </div>
           <div className="mt-10 text-center">
             <Button to="/contact" icon={Phone}>
-              Enquire About {business.shortName}
+              {t('Enquire About')} {business.shortName}
             </Button>
           </div>
         </Container>

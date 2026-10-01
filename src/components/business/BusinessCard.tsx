@@ -4,6 +4,7 @@ import type { Business } from '@/data/businesses'
 import { icons } from '@/lib/icons'
 import { accentThemes, cn } from '@/lib/theme'
 import SmartImage from '@/components/ui/SmartImage'
+import { useLanguage } from '@/lib/language'
 
 interface BusinessCardProps {
   business: Business
@@ -13,6 +14,7 @@ interface BusinessCardProps {
 export default function BusinessCard({ business, className }: BusinessCardProps) {
   const theme = accentThemes[business.accent]
   const Icon = icons[business.icon] ?? ArrowRight
+  const { t } = useLanguage()
 
   return (
     <article
@@ -43,9 +45,9 @@ export default function BusinessCard({ business, className }: BusinessCardProps)
 
       <div className="flex flex-1 flex-col p-6">
         <h3 className="text-xl font-bold text-slate-900">{business.name}</h3>
-        <p className={cn('mt-1 text-sm font-semibold', theme.text)}>{business.tagline}</p>
+        <p className={cn('mt-1 text-sm font-semibold', theme.text)}>{t(business.tagline)}</p>
         <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600">
-          {business.description}
+          {t(business.description)}
         </p>
         <Link
           to={`/businesses/${business.slug}`}
@@ -54,9 +56,9 @@ export default function BusinessCard({ business, className }: BusinessCardProps)
             theme.text,
             'hover:underline',
           )}
-          aria-label={`Learn more about ${business.name}`}
+          aria-label={`${t('Learn more about')} ${business.name}`}
         >
-          Learn more
+          {t('Learn more')}
           <ArrowRight
             aria-hidden="true"
             className="size-4 transition-transform group-hover:translate-x-1"

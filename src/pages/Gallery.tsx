@@ -9,8 +9,10 @@ import Container from '@/components/ui/Container'
 import CTASection from '@/components/ui/CTASection'
 import GalleryGrid from '@/components/gallery/GalleryGrid'
 import SectionHeading from '@/components/ui/SectionHeading'
+import { useLanguage } from '@/lib/language'
 
 export default function Gallery() {
+  const { t } = useLanguage()
   const [active, setActive] = useState<GalleryCategory>('all')
 
   const items = useMemo(
@@ -24,13 +26,13 @@ export default function Gallery() {
       <section className="bg-gradient-to-r from-brand-800 via-brand-700 to-brand-900 py-16 sm:py-20">
         <Container>
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold-400">
-            Gallery
+            {t('Gallery')}
           </p>
           <h1 className="mt-3 max-w-3xl text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
-            A look inside our world
+            {t('A look inside our world')}
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-brand-100 sm:text-lg">
-            People, products and places that make up Shekilindi.
+            {t('People, products and places that make up Shekilindi.')}
           </p>
         </Container>
       </section>
@@ -48,7 +50,7 @@ export default function Gallery() {
           <div
             className="mt-8 flex flex-wrap justify-center gap-2"
             role="tablist"
-            aria-label="Gallery categories"
+            aria-label={t('Gallery categories')}
           >
             {galleryCategories.map((category) => (
               <button
@@ -64,7 +66,7 @@ export default function Gallery() {
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200',
                 )}
               >
-                {category.label}
+                {t(category.label)}
               </button>
             ))}
           </div>

@@ -2,6 +2,7 @@ import { CheckCircle2, Send } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import { cn } from '@/lib/theme'
 import Button from '@/components/ui/Button'
+import { useLanguage } from '@/lib/language'
 
 interface FormState {
   name: string
@@ -31,6 +32,7 @@ const inputClasses = (invalid: boolean) =>
  * Client-side contact form submitted through Web3Forms.
  */
 export default function ContactForm() {
+  const { t } = useLanguage()
   const [form, setForm] = useState<FormState>(initialState)
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({})
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
@@ -96,12 +98,12 @@ export default function ContactForm() {
     return (
       <div className="rounded-2xl border border-herbal-200 bg-herbal-50 p-10 text-center">
         <CheckCircle2 aria-hidden="true" className="mx-auto size-10 text-herbal-600" />
-        <h3 className="mt-4 text-xl font-bold text-slate-900">Message sent!</h3>
+        <h3 className="mt-4 text-xl font-bold text-slate-900">{t('Message sent!')}</h3>
         <p className="mt-2 text-sm text-slate-600">
-          Thank you for reaching out — we will get back to you as soon as possible.
+          {t('Thank you for reaching out — we will get back to you as soon as possible.')}
         </p>
         <Button className="mt-6" variant="outline" onClick={() => setStatus('idle')}>
-          Send another message
+          {t('Send another message')}
         </Button>
       </div>
     )
@@ -112,25 +114,25 @@ export default function ContactForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="contact-name" className="mb-1.5 block text-sm font-semibold text-slate-800">
-            Full name <span className="text-red-500">*</span>
+            {t('Full name')} <span className="text-red-500">*</span>
           </label>
           <input
             id="contact-name"
             name="name"
             type="text"
             autoComplete="name"
-            placeholder="Your name"
+            placeholder={t('Your name')}
             value={form.name}
             onChange={(event) => update('name', event.target.value)}
             aria-invalid={Boolean(errors.name)}
             className={inputClasses(Boolean(errors.name))}
           />
-          {errors.name ? <p className="mt-1 text-xs text-red-600">{errors.name}</p> : null}
+          {errors.name ? <p className="mt-1 text-xs text-red-600">{t(errors.name)}</p> : null}
         </div>
 
         <div>
           <label htmlFor="contact-email" className="mb-1.5 block text-sm font-semibold text-slate-800">
-            Email <span className="text-red-500">*</span>
+            {t('Email')} <span className="text-red-500">*</span>
           </label>
           <input
             id="contact-email"
@@ -143,12 +145,12 @@ export default function ContactForm() {
             aria-invalid={Boolean(errors.email)}
             className={inputClasses(Boolean(errors.email))}
           />
-          {errors.email ? <p className="mt-1 text-xs text-red-600">{errors.email}</p> : null}
+          {errors.email ? <p className="mt-1 text-xs text-red-600">{t(errors.email)}</p> : null}
         </div>
 
         <div>
           <label htmlFor="contact-phone" className="mb-1.5 block text-sm font-semibold text-slate-800">
-            Phone (optional)
+            {t('Phone (optional)')}
           </label>
           <input
             id="contact-phone"
@@ -164,13 +166,13 @@ export default function ContactForm() {
 
         <div>
           <label htmlFor="contact-subject" className="mb-1.5 block text-sm font-semibold text-slate-800">
-            Subject (optional)
+            {t('Subject (optional)')}
           </label>
           <input
             id="contact-subject"
             name="subject"
             type="text"
-            placeholder="How can we help?"
+            placeholder={t('How can we help?')}
             value={form.subject}
             onChange={(event) => update('subject', event.target.value)}
             className={inputClasses(false)}
@@ -180,19 +182,19 @@ export default function ContactForm() {
 
       <div>
         <label htmlFor="contact-message" className="mb-1.5 block text-sm font-semibold text-slate-800">
-          Message <span className="text-red-500">*</span>
+            {t('Message')} <span className="text-red-500">*</span>
         </label>
         <textarea
           id="contact-message"
           name="message"
           rows={6}
-          placeholder="Write your message here..."
+          placeholder={t('Write your message here...')}
           value={form.message}
           onChange={(event) => update('message', event.target.value)}
           aria-invalid={Boolean(errors.message)}
           className={cn(inputClasses(Boolean(errors.message)), 'resize-y')}
         />
-        {errors.message ? <p className="mt-1 text-xs text-red-600">{errors.message}</p> : null}
+        {errors.message ? <p className="mt-1 text-xs text-red-600">{t(errors.message)}</p> : null}
       </div>
 
       <Button
@@ -202,11 +204,11 @@ export default function ContactForm() {
         disabled={status === 'sending'}
         className="w-full sm:w-auto"
       >
-        {status === 'sending' ? 'Sending...' : 'Send Message'}
+        {status === 'sending' ? t('Sending...') : t('Send Message')}
       </Button>
       {submitMessage ? (
         <p className="text-sm text-red-700" role="alert">
-          {submitMessage}
+          {t(submitMessage)}
         </p>
       ) : null}
     </form>

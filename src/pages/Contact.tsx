@@ -3,6 +3,7 @@ import { siteInfo } from '@/data/site'
 import Container from '@/components/ui/Container'
 import ContactForm from '@/components/contact/ContactForm'
 import SectionHeading from '@/components/ui/SectionHeading'
+import { useLanguage } from '@/lib/language'
 
 interface ChannelValue {
   text: string
@@ -45,20 +46,21 @@ const channels: ContactChannel[] = [
 ]
 
 export default function Contact() {
+  const { t } = useLanguage()
+
   return (
     <>
       {/* Hero */}
       <section className="bg-gradient-to-r from-brand-800 via-brand-700 to-brand-900 py-16 sm:py-20">
         <Container>
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold-400">
-            Contact
+            {t('Contact')}
           </p>
           <h1 className="mt-3 max-w-3xl text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
-            We'd love to hear from you
+            {t("We'd love to hear from you")}
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-brand-100 sm:text-lg">
-            Questions, partnerships or feedback — reach out and our team will respond
-            as soon as possible.
+            {t('Questions, partnerships or feedback — reach out and our team will respond as soon as possible.')}
           </p>
         </Container>
       </section>
@@ -82,7 +84,7 @@ export default function Contact() {
                 </span>
                 <span className="min-w-0">
                   <span className="block text-xs font-bold uppercase tracking-wider text-slate-500">
-                    {channel.label}
+                    {t(channel.label)}
                   </span>
                   {channel.values.map((value) => (
                     <span key={value.text} className="mt-0.5 block text-sm font-semibold text-slate-800">

@@ -4,6 +4,8 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { navLinks, siteInfo } from '@/data/site'
 import { cn } from '@/lib/theme'
 import Button from '@/components/ui/Button'
+import LanguageSwitcher from '@/components/layout/LanguageSwitcher'
+import { useLanguage } from '@/lib/language'
 
 interface MobileMenuProps {
   open: boolean
@@ -12,6 +14,7 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ open, onClose }: MobileMenuProps) {
   const location = useLocation()
+  const { t } = useLanguage()
 
   // Close the menu whenever the route changes
   useEffect(() => {
@@ -51,7 +54,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
 
       {/* Panel */}
       <nav
-        aria-label="Mobile navigation"
+        aria-label={t('Mobile navigation')}
         aria-hidden={!open}
         className={cn(
           'absolute right-0 top-0 flex h-full w-80 max-w-[85vw] flex-col bg-white shadow-2xl transition-transform duration-300 ease-out',
@@ -70,7 +73,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
           <button
             type="button"
             className="inline-flex size-10 items-center justify-center rounded-lg text-slate-600 transition-colors hover:bg-slate-100"
-            aria-label="Close menu"
+            aria-label={t('Close menu')}
             onClick={onClose}
           >
             <X aria-hidden="true" className="size-5" />
@@ -92,17 +95,20 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                   )
                 }
               >
-                {link.label}
+                {t(link.label)}
               </NavLink>
             </li>
           ))}
         </ul>
 
         <div className="border-t border-slate-100 px-5 py-5">
-          <Button to="/contact" className="w-full" onClick={undefined}>
-            Get in Touch
-          </Button>
-          <p className="mt-4 text-center text-xs text-slate-500">{siteInfo.tagline}</p>
+          <div className="flex items-center justify-between gap-3">
+            <Button to="/contact" className="flex-1" onClick={undefined}>
+              {t('Get in Touch')}
+            </Button>
+            <LanguageSwitcher />
+          </div>
+          <p className="mt-4 text-center text-xs text-slate-500">{t(siteInfo.tagline)}</p>
         </div>
       </nav>
     </div>
